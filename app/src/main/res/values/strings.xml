@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">motosignal</string>
+    <string name="gcmSenderId">111</string>
 </resources>

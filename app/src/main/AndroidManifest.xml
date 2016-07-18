@@ -3,6 +3,12 @@
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <permission
+        android:name="su.levenetc.motosignal.permission.C2D_MESSAGE"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="su.levenetc.motosignal.permission.C2D_MESSAGE"/>
 
     <application
         android:name=".App"
@@ -20,6 +26,54 @@
         </activity>
 
         <service android:name=".services.SensorsDataCollectorService"/>
+
+        <!-- Google Cloud Message components -->
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="gcm.play.android.samples.com.gcmquickstart"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".services.GCMService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".services.InstanceIDService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".services.GCMRegistrationService"
+            android:exported="false">
+        </service>
+
+        <!-- Google Cloud Message components -->
+
+        <!--<service-->
+        <!--android:name=".services.GCMService"-->
+        <!--android:exported="false">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.google.android.c2dm.intent.RECEIVE"/>-->
+        <!--</intent-filter>-->
+        <!--</service>-->
+        <!--<service-->
+        <!--android:name="com.example.MyInstanceIDListenerService"-->
+        <!--android:exported="false">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.google.android.gms.iid.InstanceID"/>-->
+        <!--</intent-filter>-->
+        <!--</service>-->
 
     </application>
 

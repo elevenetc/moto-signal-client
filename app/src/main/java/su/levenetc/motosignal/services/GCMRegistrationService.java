@@ -9,7 +9,9 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
+import rx.schedulers.Schedulers;
 import su.levenetc.motosignal.R;
+import su.levenetc.motosignal.api.ApiManager;
 
 /**
  * Created by Eugene Levenetc on 18/07/2016.
@@ -39,7 +41,17 @@ public class GCMRegistrationService extends IntentService {
 	}
 
 	private void sendToServer(String token) {
+		ApiManager.getApi().sendGCMToken(token)
+				.subscribeOn(Schedulers.io())
+				.subscribe(o -> {
+					if (o == null) {
 
+					}
+				}, throwable -> {
+					if (throwable == null) {
+
+					}
+				});
 	}
 
 }

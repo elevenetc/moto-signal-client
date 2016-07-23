@@ -1,10 +1,12 @@
 package su.levenetc.motosignal.managers;
 
-import rx.Observable;
+import rx.Completable;
 
 /**
  * Created by Eugene Levenetc on 23/07/2016.
  */
 public interface ServicesManager {
-	Observable<String> sendGCMToken();
+	Completable sendGCMToken();
+
+	Completable clearGCMToken();
 }

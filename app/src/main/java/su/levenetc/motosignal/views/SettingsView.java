@@ -11,4 +11,8 @@ public interface SettingsView {
 	void registrationGCMFail();
 
 	void registrationGCMSuccess();
+
+	void tokenClearSuccess();
+
+	void tokenClearFail();
 }

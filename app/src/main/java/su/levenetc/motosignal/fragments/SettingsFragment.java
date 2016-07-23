@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import su.levenetc.motosignal.R;
 import su.levenetc.motosignal.di.DIHelper;
@@ -77,6 +78,22 @@ public class SettingsFragment extends Fragment implements SettingsView {
 	@Override public void registrationGCMSuccess() {
 		btnRegister.setEnabled(false);
 		btnUnregister.setEnabled(true);
+	}
+
+	@Override public void tokenClearSuccess() {
+
+	}
+
+	@Override public void tokenClearFail() {
+
+	}
+
+	@OnClick(R.id.btn_register) public void sendToken() {
+		presenter.sendGCMToken();
+	}
+
+	@OnClick(R.id.btn_unregister) public void clearToken() {
+		presenter.clearGCMToken();
 	}
 
 	private void disableView() {

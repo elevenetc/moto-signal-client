@@ -26,17 +26,29 @@ public class SettingsPresenter extends BasicPresenter<SettingsView> {
 
 	public void clearGCMToken() {
 		view.showProgress();
+		addSub(servicesManager.clearGCMToken()
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribe(this::onTokenCleared, this::onTokenNotCleared));
 	}
 
 	public void sendGCMToken() {
 		view.showProgress();
-		servicesManager.sendGCMToken()
+		addSub(servicesManager.sendGCMToken()
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe();
+				.subscribe(this::onTokenSent, this::onTokenNotSent));
 	}
 
-	private void onTokenSent(String token) {
+	private void onTokenCleared() {
+		view.tokenClearSuccess();
+	}
+
+	private void onTokenNotCleared(Throwable t) {
+		view.tokenClearFail();
+	}
+
+	private void onTokenSent() {
 		settingsManager.setGCMTokenSent(true);
 		view.registrationGCMSuccess();
 	}

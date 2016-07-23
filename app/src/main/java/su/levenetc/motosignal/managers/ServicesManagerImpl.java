@@ -7,6 +7,7 @@ import com.google.android.gms.iid.InstanceID;
 
 import java.io.IOException;
 
+import rx.Completable;
 import rx.Observable;
 import rx.Subscriber;
 import su.levenetc.motosignal.R;
@@ -30,8 +31,12 @@ public class ServicesManagerImpl implements ServicesManager {
 		this.restManager = restManager;
 	}
 
-	@Override public Observable<String> sendGCMToken() {
-		return getToken().flatMap(this::sendToken);
+	@Override public Completable sendGCMToken() {
+		return getToken().flatMap(this::sendToken).toCompletable();
+	}
+
+	@Override public Completable clearGCMToken() {
+		return getToken().flatMap(s -> restManager.clearToken(s)).toCompletable();
 	}
 
 	private Observable<String> getToken() {
@@ -55,5 +60,9 @@ public class ServicesManagerImpl implements ServicesManager {
 
 	private Observable<String> sendToken(String token) {
 		return restManager.sendGCMToken(token).map(o -> token);
+	}
+
+	private Observable<Object> clearToken(String token) {
+		return restManager.clearToken(token);
 	}
 }

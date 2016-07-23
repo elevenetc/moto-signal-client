@@ -7,4 +7,6 @@ import rx.Observable;
  */
 public interface RestManager {
 	Observable<Object> sendGCMToken(String token);
+
+	Observable<Object> clearToken(String token);
 }

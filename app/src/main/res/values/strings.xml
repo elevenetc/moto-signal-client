@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">motosignal</string>
     <string name="gcmSenderId">743596259723</string>
+    <string name="unregister">Unregister</string>
+    <string name="register">Register</string>
+    <string name="status">Status:</string>
+    <string name="status_registered">Status: registered</string>
+    <string name="status_unregistered">Status: unregistered</string>
+    <string name="status_registration_progress">Status: registration progress</string>
 </resources>

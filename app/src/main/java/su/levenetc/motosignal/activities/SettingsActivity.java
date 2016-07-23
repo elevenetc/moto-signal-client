@@ -1,11 +1,10 @@
 package su.levenetc.motosignal.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import su.levenetc.motosignal.services.GCMRegistrationService;
+import su.levenetc.motosignal.fragments.SettingsFragment;
 
 /**
  * Created by Eugene Levenetc on 17/07/2016.
@@ -13,7 +12,11 @@ import su.levenetc.motosignal.services.GCMRegistrationService;
 public class SettingsActivity extends AppCompatActivity {
 	@Override protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		startService(new Intent(this, GCMRegistrationService.class));
+		if (savedInstanceState == null) {
+			getSupportFragmentManager()
+					.beginTransaction()
+					.add(SettingsFragment.create(), null)
+					.commit();
+		}
 	}
 }

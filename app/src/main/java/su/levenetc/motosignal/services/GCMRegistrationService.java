@@ -41,7 +41,7 @@ public class GCMRegistrationService extends IntentService {
 	}
 
 	private void sendToServer(String token) {
-		ApiManager.getApi().sendGCMToken(token)
+		ApiManager.getRestService().sendGCMToken(token)
 				.subscribeOn(Schedulers.io())
 				.subscribe(o -> {
 					if (o == null) {

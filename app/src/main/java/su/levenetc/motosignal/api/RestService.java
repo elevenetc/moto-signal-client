@@ -7,6 +7,6 @@ import rx.Observable;
 /**
  * Created by Eugene Levenetc on 20/07/2016.
  */
-public interface Api {
+public interface RestService {
 	@POST("gcmToken") Observable<Object> sendGCMToken(@Query("token") String token);
 }

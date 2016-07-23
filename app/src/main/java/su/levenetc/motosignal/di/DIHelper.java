@@ -16,7 +16,7 @@ public class DIHelper {
 
 	public static void init(Context context) {
 		appComponent = DaggerAppComponent.builder()
-				.settingsModule(new SettingsModule())
+				.settingsModule(new SettingsModule(context))
 				.servicesModule(new ServicesModule(context))
 				.build();
 	}

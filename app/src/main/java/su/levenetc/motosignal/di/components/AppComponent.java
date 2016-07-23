@@ -3,6 +3,7 @@ package su.levenetc.motosignal.di.components;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import su.levenetc.motosignal.di.modules.RestModule;
 import su.levenetc.motosignal.di.modules.ServicesModule;
 import su.levenetc.motosignal.di.modules.SettingsModule;
 import su.levenetc.motosignal.presenters.SettingsPresenter;
@@ -13,7 +14,8 @@ import su.levenetc.motosignal.presenters.SettingsPresenter;
 @Singleton
 @Component(modules = {
 		SettingsModule.class,
-		ServicesModule.class
+		ServicesModule.class,
+		RestModule.class
 })
 public interface AppComponent {
 	void inject(SettingsPresenter presenter);

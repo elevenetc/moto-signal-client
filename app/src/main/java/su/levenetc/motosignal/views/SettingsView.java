@@ -6,7 +6,7 @@ package su.levenetc.motosignal.views;
 public interface SettingsView {
 	void setIsRegisteredAtGCM(boolean value);
 
-	void registrationGCMProgress();
+	void showProgress();
 
 	void registrationGCMFail();
 

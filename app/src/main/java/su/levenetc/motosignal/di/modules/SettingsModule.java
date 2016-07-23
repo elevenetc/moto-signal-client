@@ -1,5 +1,7 @@
 package su.levenetc.motosignal.di.modules;
 
+import android.content.Context;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -12,7 +14,13 @@ import su.levenetc.motosignal.managers.SettingsManagerImpl;
  */
 @Module
 public class SettingsModule {
+	private Context context;
+
+	public SettingsModule(Context context) {
+		this.context = context;
+	}
+
 	@Singleton @Provides public SettingsManager provideSettingsManager() {
-		return new SettingsManagerImpl();
+		return new SettingsManagerImpl(context);
 	}
 }

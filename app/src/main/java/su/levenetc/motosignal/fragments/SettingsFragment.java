@@ -64,7 +64,7 @@ public class SettingsFragment extends Fragment implements SettingsView {
 		}
 	}
 
-	@Override public void registrationGCMProgress() {
+	@Override public void showProgress() {
 		disableView();
 		textStatus.setText(R.string.status_registration_progress);
 	}

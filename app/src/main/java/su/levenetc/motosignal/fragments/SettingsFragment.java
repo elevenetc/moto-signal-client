@@ -43,8 +43,9 @@ public class SettingsFragment extends Fragment implements SettingsView {
 	}
 
 	@Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View result = inflater.inflate(R.layout.fragment_settings, container);
+		View result = inflater.inflate(R.layout.fragment_settings, container, false);
 		unbinder = ButterKnife.bind(this, result);
+		presenter.setView(this);
 		return result;
 	}
 
@@ -60,7 +61,7 @@ public class SettingsFragment extends Fragment implements SettingsView {
 			btnUnregister.setEnabled(true);
 		} else {
 			textStatus.setText(R.string.status_unregistered);
-			btnRegister.setEnabled(false);
+			btnRegister.setEnabled(true);
 			btnUnregister.setEnabled(false);
 		}
 	}
@@ -70,22 +71,29 @@ public class SettingsFragment extends Fragment implements SettingsView {
 		textStatus.setText(R.string.status_registration_progress);
 	}
 
-	@Override public void registrationGCMFail() {
+	@Override public void registrationGCMFail(Throwable t) {
+		String prefix = getContext().getString(R.string.error);
+		textStatus.setText(String.format("%s:%s", prefix, t.toString()));
 		btnRegister.setEnabled(true);
 		btnUnregister.setEnabled(false);
 	}
 
 	@Override public void registrationGCMSuccess() {
+		textStatus.setText(R.string.status_registered);
 		btnRegister.setEnabled(false);
 		btnUnregister.setEnabled(true);
 	}
 
 	@Override public void tokenClearSuccess() {
-
+		btnRegister.setEnabled(true);
+		btnUnregister.setEnabled(false);
+		textStatus.setText(R.string.status_unregistered);
 	}
 
 	@Override public void tokenClearFail() {
-
+		btnRegister.setEnabled(false);
+		btnUnregister.setEnabled(true);
+		textStatus.setText(R.string.status_registered);
 	}
 
 	@OnClick(R.id.btn_register) public void sendToken() {

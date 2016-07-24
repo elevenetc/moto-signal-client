@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import su.levenetc.motosignal.managers.RestManager;
 import su.levenetc.motosignal.managers.ServicesManager;
 import su.levenetc.motosignal.managers.ServicesManagerImpl;
 import su.levenetc.motosignal.managers.SettingsManager;
@@ -22,7 +23,7 @@ public class ServicesModule {
 		this.context = context;
 	}
 
-	@Provides @Singleton public ServicesManager provideServicesManager(SettingsManager settingsManager) {
-		return new ServicesManagerImpl(context, settingsManager);
+	@Provides @Singleton public ServicesManager provideServicesManager(SettingsManager settingsManager, RestManager restManager) {
+		return new ServicesManagerImpl(context, settingsManager, restManager);
 	}
 }

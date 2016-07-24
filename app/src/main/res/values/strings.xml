@@ -7,4 +7,5 @@
     <string name="status_registered">Status: registered</string>
     <string name="status_unregistered">Status: unregistered</string>
     <string name="status_registration_progress">Status: registration progress</string>
+    <string name="error">Error</string>
 </resources>

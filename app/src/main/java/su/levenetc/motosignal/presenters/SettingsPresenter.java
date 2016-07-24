@@ -54,6 +54,6 @@ public class SettingsPresenter extends BasicPresenter<SettingsView> {
 	}
 
 	private void onTokenNotSent(Throwable t) {
-		view.registrationGCMFail();
+		view.registrationGCMFail(t);
 	}
 }

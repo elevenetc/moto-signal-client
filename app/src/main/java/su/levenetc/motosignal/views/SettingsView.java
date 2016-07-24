@@ -8,7 +8,7 @@ public interface SettingsView {
 
 	void showProgress();
 
-	void registrationGCMFail();
+	void registrationGCMFail(Throwable t);
 
 	void registrationGCMSuccess();
 
